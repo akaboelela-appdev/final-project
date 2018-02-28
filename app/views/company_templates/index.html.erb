@@ -1,74 +1,62 @@
 <h1>
-  All companies
+  Search Roles by
 </h1>
 
-<a href="/companies/new">
-  Add a new company
-</a>
+<form action="/search_results" method="post">
+  <!-- Label and input for city_id -->
+  <div class="form-group">
+    <label for="city_id">
+      City
+    </label>
 
-<hr>
+    <%=
+      select_tag("city_id",
+        options_from_collection_for_select(
+          City.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
 
-<table class="table">
-  <tr>
-    <th>
-      ID
-    </th>
+  <!-- Label and input for coveragegroup_id -->
+  <div class="form-group">
+    <label for="coveragegroup_id">
+      Coveragegroup
+    </label>
+    <%=
+      select_tag("coveragegroup_id",
+        options_from_collection_for_select(
+          Coveragegroup.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
 
-    <th>
-      Name
-    </th>
+  <!-- Label and input for company_id -->
+  <div class="form-group">
+    <label for="company_id">
+      Company
+    </label>
 
-    <th>
-      Logo src
-    </th>
+    <%=
+      select_tag("company_id",
+        options_from_collection_for_select(
+          Company.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
 
-    <th>
-      Industry
-    </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
-    </th>
-
-    <th>
-    </th>
-  </tr>
-
-  <% @companies.each do |company| %>
-  <tr>
-    <td>
-      <%= company.id %>
-    </td>
-
-    <td>
-      <%= company.name %>
-    </td>
-
-    <td>
-      <%= company.logo_src %>
-    </td>
-
-    <td>
-      <%= company.industry_id %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(company.created_at) %> ago
-    </td>
-
-    <td>
-      <%= time_ago_in_words(company.updated_at) %> ago
-    </td>
-
-    <td>
-      <a href="/companies/<%= company.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <% end %>
-</table>
+  <button class="btn btn-block btn-outline-secondary">
+    Search
+  </button>
+</form>

@@ -40,17 +40,20 @@
       Company
     </label>
 
-    <input type="text" id="company_id" name="company_id" class="form-control" value="<%= @contact.try(:company_id) %>">
+    <%=
+      select_tag("company_id",
+        options_from_collection_for_select(
+          Company.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
   </div>
 
   <!-- Label and input for user_id -->
-  <div class="form-group">
-    <label for="user_id">
-      User
-    </label>
-
-    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @contact.try(:user_id) %>">
-  </div>
+    <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
 
   <button class="btn btn-block btn-outline-secondary">
     Create contact

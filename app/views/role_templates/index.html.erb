@@ -1,18 +1,17 @@
-<h1>
-  All roles
-</h1>
+<!-- Validation failure messages -->
+<% if @role.present? %>
+  <% if @role.errors.any? %>
+    <% @role.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
 
-<a href="/roles/new">
-  Add a new role
-</a>
-
-<hr>
-
+<h3>Bookmarked Roles</h3>
 <table class="table">
   <tr>
-    <th>
-      ID
-    </th>
 
     <th>
       Title
@@ -33,51 +32,31 @@
     <th>
       Due date
     </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
-    </th>
-
+    
     <th>
     </th>
   </tr>
 
-  <% @roles.each do |role| %>
+  <% @bookmarked_roles.each do |role| %>
   <tr>
-    <td>
-      <%= role.id %>
-    </td>
-
     <td>
       <%= role.title %>
     </td>
 
     <td>
-      <%= role.city_id %>
+      <%= City.find(role.city_id).name %>
     </td>
 
     <td>
-      <%= role.coveragegroup_id %>
+      <%= Coveragegroup.find(role.coveragegroup_id).name %>
     </td>
 
     <td>
-      <%= role.company_id %>
+      <%= Company.find(role.company_id).name %>
     </td>
 
     <td>
       <%= role.due_date %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(role.created_at) %> ago
-    </td>
-
-    <td>
-      <%= time_ago_in_words(role.updated_at) %> ago
     </td>
 
     <td>
@@ -88,3 +67,148 @@
   </tr>
   <% end %>
 </table>
+
+<hr>
+
+<h3>All Roles</h3>
+<table class="table">
+  <tr>
+
+    <th>
+      Title
+    </th>
+
+    <th>
+      City
+    </th>
+
+    <th>
+      Coveragegroup
+    </th>
+
+    <th>
+      Company
+    </th>
+
+    <th>
+      Due date
+    </th>
+    
+    <th>
+    </th>
+  </tr>
+
+  <% @roles.each do |role| %>
+  <tr>
+    <td>
+      <%= role.title %>
+    </td>
+
+    <td>
+      <%= City.find(role.city_id).name %>
+    </td>
+
+    <td>
+      <%= Coveragegroup.find(role.coveragegroup_id).name %>
+    </td>
+
+    <td>
+      <%= Company.find(role.company_id).name %>
+    </td>
+
+    <td>
+      <%= role.due_date %>
+    </td>
+
+    <td>
+      <a href="/roles/<%= role.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<h1>
+  Add a new role
+</h1>
+
+<hr>
+
+<form action="/create_role" method="post">
+  <!-- Label and input for title -->
+  <div class="form-group">
+    <label for="title">
+      Title
+    </label>
+
+    <input type="text" id="title" name="title" class="form-control" value="<%= @role.try(:title) %>">
+  </div>
+
+  <!-- Label and input for city_id -->
+  <div class="form-group">
+    <label for="city_id">
+      City
+    </label>
+
+    <%=
+      select_tag("city_id",
+        options_from_collection_for_select(
+          City.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
+
+  <!-- Label and input for coveragegroup_id -->
+  <div class="form-group">
+    <label for="coveragegroup_id">
+      Coveragegroup
+    </label>
+
+    <%=
+      select_tag("coveragegroup_id",
+        options_from_collection_for_select(
+          Coveragegroup.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
+
+  <!-- Label and input for company_id -->
+  <div class="form-group">
+    <label for="company_id">
+      Company
+    </label>
+
+    <%=
+      select_tag("company_id",
+        options_from_collection_for_select(
+          Company.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
+
+  <!-- Label and input for due_date -->
+  <div class="form-group">
+    <label for="due_date">
+      Due date
+    </label>
+
+    <input type="text" id="due_date" name="due_date" class="form-control" value="<%= @role.try(:due_date) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create role!
+  </button>
+</form>

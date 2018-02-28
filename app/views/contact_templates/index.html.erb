@@ -1,5 +1,5 @@
 <h1>
-  All contacts
+  My Contacts
 </h1>
 
 <a href="/contacts/new">
@@ -10,9 +10,6 @@
 
 <table class="table">
   <tr>
-    <th>
-      ID
-    </th>
 
     <th>
       Name
@@ -25,29 +22,14 @@
     <th>
       Company
     </th>
-
-    <th>
-      User
-    </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
-    </th>
-
+    
     <th>
     </th>
   </tr>
 
   <% @contacts.each do |contact| %>
+  <% if contact.user_id == current_user.id %>
   <tr>
-    <td>
-      <%= contact.id %>
-    </td>
-
     <td>
       <%= contact.name %>
     </td>
@@ -57,19 +39,9 @@
     </td>
 
     <td>
-      <%= contact.company_id %>
-    </td>
-
-    <td>
-      <%= contact.user_id %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(contact.created_at) %> ago
-    </td>
-
-    <td>
-      <%= time_ago_in_words(contact.updated_at) %> ago
+      <a href="/companies/<%=contact.company_id%>">
+        <%= Company.find(contact.company_id).name %>
+      </a>
     </td>
 
     <td>
@@ -78,5 +50,6 @@
       </a>
     </td>
   </tr>
+  <% end %>
   <% end %>
 </table>
