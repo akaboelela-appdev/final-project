@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root("roles#index")
   # Routes for the Note resource:
 
   # CREATE
