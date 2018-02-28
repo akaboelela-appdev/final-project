@@ -26,7 +26,7 @@ class ToDosController < ApplicationController
     if @to_do.valid?
       @to_do.save
 
-      redirect_to("/to_dos", :notice => "To do created successfully.")
+      redirect_back(fallback_location: '/bookmarks')
     else
       render("to_do_templates/new_form.html.erb")
     end

@@ -1,66 +1,57 @@
 <h3>Bookmarked Roles</h3>
-<table class="table">
-  <tr>
 
-    <th>
-      Title
-    </th>
-
-    <th>
-      City
-    </th>
-
-    <th>
-      Coveragegroup
-    </th>
-
-    <th>
-      Company
-    </th>
-
-    <th>
-      Due date
-    </th>
-    
-    <th>
-    </th>
-    <th>
-    </th>
-  </tr>
-
-  <% @bookmarked_roles.each do |role| %>
-  <tr>
-    <td>
-      <%= role.title %>
-    </td>
-
-    <td>
-      <%= City.find(role.city_id).name %>
-    </td>
-
-    <td>
-      <%= Coveragegroup.find(role.coveragegroup_id).name %>
-    </td>
-
-    <td>
-      <%= Company.find(role.company_id).name %>
-    </td>
-
-    <td>
-      <%= role.due_date %>
-    </td>
-    
-    <td>
-      <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
-        <i class="fas fa-star"></i>
-      </a>
-    </td>
-
-    <td>
-      <a href="/roles/<%= role.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <% end %>
-</table>
+<% @bookmarked_roles.each do |role| %>
+  <div class="card mb-2">
+    <div class="card-body pb-1 pt-3">
+      <div class="float-left">
+        <h5 class="card-title"><%=Coveragegroup.find(role.coveragegroup_id).name + " " +role.title+ " at " + Company.find(role.company_id).name + " in " + City.find(role.city_id).name%></h5>
+    </div>
+    <div class="float-right">
+      <button class="btn btn-success">
+        <a href="/roles/<%=role.id%>" style="color:inherit;">See More</a>
+      </button>
+      </div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% if role.to_dos.exists? %>
+        <% role.to_dos.where(user_id: current_user.id).each do |todo| %>
+          <li class="list-group-item">
+            <div class="float-left">
+              <%=todo.body%>
+            </div>
+            <div class="float-right">
+              <% if todo.done == true %>
+                <form action="/update_to_do/<%=todo.id%>" method="post">
+                  <input type="hidden" name="user_id" value="<%=current_user.id%>">
+                  <input type="hidden" name="role_id" value="<%=role.id%>">
+                  <input type="hidden" name="done" value="<%=false%>">
+                  <input type="hidden" name="body" value="<%=todo.body%>">
+                  <button type="submit" style="border:0px;"><i class="far fa-check-square"></i></button>
+                </form>
+              <% else %>
+                <form action="/update_to_do/<%=todo.id%>" method="post">
+                  <input type="hidden" name="user_id" value="<%=current_user.id%>">
+                  <input type="hidden" name="role_id" value="<%=role.id%>">
+                  <input type="hidden" name="done" value="<%=true%>">
+                  <input type="hidden" name="body" value="<%=todo.body%>">
+                  <button type="submit" style="border:0px;"><i class="far fa-square"></i></button>
+                </form>
+              <% end %>
+            </div>
+          </li>
+        <%end%>
+      <%end%>
+      <li class="list-group-item">
+        <form action="/create_to_do" method="post">
+          <input type="hidden" name="user_id" value="<%=current_user.id%>">
+          <input type="hidden" name="role_id" value="<%=role.id%>">
+          <input type="hidden" name="done" value="<%=false%>">
+          <div class="input-group">
+            <input type="text" class="form-control" name="body" placeholder="...add a todo">
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+<%end%>

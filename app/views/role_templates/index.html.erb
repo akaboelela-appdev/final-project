@@ -9,91 +9,37 @@
   <% end %>
 <% end %>
 
-<hr>
-
 <h3>All Roles</h3>
-<table class="table">
-  <tr>
-
-    <th>
-      Title
-    </th>
-
-    <th>
-      City
-    </th>
-
-    <th>
-      Coveragegroup
-    </th>
-
-    <th>
-      Company
-    </th>
-
-    <th>
-      Due date
-    </th>
-    
-    <th>
-    </th>
-    
-    <th>
-    </th>
-  </tr>
-
-  <% @roles.each do |role| %>
-  <tr>
-    <td>
-      <%= role.title %>
-    </td>
-
-    <td>
-      <%= City.find(role.city_id).name %>
-    </td>
-
-    <td>
-      <%= Coveragegroup.find(role.coveragegroup_id).name %>
-    </td>
-
-    <td>
-      <%= Company.find(role.company_id).name %>
-    </td>
-
-    <td>
-      <%= role.due_date %>
-    </td>
-
-    <td>
-      <% if Bookmark.where(user_id: current_user.id).where(role_id: role.id).exists? %>
-      <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
-        <i class="fas fa-star"></i>
-      </a>
-      <% else %>
-      <form action="/create_bookmark" method="post" id="myform">
-        <input type="hidden" name="user_id" value="<%=current_user.id%>">
-        <input type="hidden" name="role_id" value="<%=role.id%>">
-        <input type="hidden" name="priority_id" value="2">
-        <input type="hidden" name="status_id" value="1">
-        <a href="#" onclick="document.getElementById('myform').submit()"><i class="far fa-star"></i></a>
-      </form>
-      <% end %>
-    </td>
-    <td>
-      <a href="/roles/<%= role.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <% end %>
-</table>
-
-<h1>
-  Add a new role
-</h1>
+<% @roles.each do |role| %>
+  <div class="card mb-2">
+    <div class="card-body pb-1 pt-3">
+      <div class="float-left">
+        <h5 class="card-title"><%=Coveragegroup.find(role.coveragegroup_id).name + " " +role.title+ " at " + Company.find(role.company_id).name + " in " + City.find(role.city_id).name%></h5>
+      </div>
+      <div class="float-right mr-4">
+          <% if Bookmark.where(user_id: current_user.id).where(role_id: role.id).exists? %>
+            <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
+              <i class="fas fa-star"></i>
+            </a>
+          <% else %>
+            <form action="/create_bookmark" method="post" id="myform">
+              <input type="hidden" name="user_id" value="<%=current_user.id%>">
+              <input type="hidden" name="role_id" value="<%=role.id%>">
+              <input type="hidden" name="priority_id" value="2">
+              <input type="hidden" name="status_id" value="1">
+              <a href="#" onclick="document.getElementById('myform').submit()">
+                <i class="far fa-star"></i>
+              </a>
+            </form>
+          <% end %>
+      </div>
+    </div>
+  </div>
+<%end%>
 
 <hr>
 
+<h3>Add a New role</h3>
 <form action="/create_role" method="post">
   <!-- Label and input for title -->
   <div class="form-group">
