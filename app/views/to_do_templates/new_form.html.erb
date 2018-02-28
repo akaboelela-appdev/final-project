@@ -1,0 +1,65 @@
+<!-- Validation failure messages -->
+<% if @to_do.present? %>
+  <% if @to_do.errors.any? %>
+    <% @to_do.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new to do
+</h1>
+
+<hr>
+
+<form action="/create_to_do" method="post">
+  <!-- Label and input for body -->
+  <div class="form-group">
+    <label for="body">
+      Body
+    </label>
+
+    <textarea id="body" name="body" class="form-control" rows="3"><%= @to_do.try(:body) %></textarea>
+  </div>
+
+  <!-- Label and input for user_id -->
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @to_do.try(:user_id) %>">
+  </div>
+
+  <!-- Label and input for role_id -->
+  <div class="form-group">
+    <label for="role_id">
+      Role
+    </label>
+
+    <input type="text" id="role_id" name="role_id" class="form-control" value="<%= @to_do.try(:role_id) %>">
+  </div>
+
+  <!-- Label and input for done -->
+  <div class="form-check">
+    <input type="hidden" value="0" name="done">
+    <input id="done" class="form-check-input" name="done" type="checkbox" <%= "checked" if @to_do.try(:done) %>>
+
+    <label for="done" class="form-check-label">
+      Done
+    </label>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create to do
+  </button>
+</form>
+
+<hr>
+
+<a href="/to_dos">
+  Go back
+</a>

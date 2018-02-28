@@ -1,0 +1,62 @@
+<!-- Validation failure messages -->
+<% if @bookmark.errors.any? %>
+  <% @bookmark.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit bookmark #<%= @bookmark.id %>
+</h1>
+
+<hr>
+
+<form action="/update_bookmark/<%= @bookmark.id %>" method="post">
+  <!-- Label and input for role_id -->
+  <div class="form-group">
+    <label for="role_id">
+      Role
+    </label>
+
+    <input type="text" id="role_id" name="role_id" class="form-control" value="<%= @bookmark.role_id %>">
+  </div>
+
+  <!-- Label and input for user_id -->
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @bookmark.user_id %>">
+  </div>
+
+  <!-- Label and input for priority_id -->
+  <div class="form-group">
+    <label for="priority_id">
+      Priority
+    </label>
+
+    <input type="text" id="priority_id" name="priority_id" class="form-control" value="<%= @bookmark.priority_id %>">
+  </div>
+
+  <!-- Label and input for status_id -->
+  <div class="form-group">
+    <label for="status_id">
+      Status
+    </label>
+
+    <input type="text" id="status_id" name="status_id" class="form-control" value="<%= @bookmark.status_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update bookmark
+  </button>
+</form>
+
+<hr>
+
+<a href="/bookmarks">
+  Go back
+</a>

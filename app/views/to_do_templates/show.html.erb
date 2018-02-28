@@ -1,0 +1,63 @@
+<h1>
+  To do #<%= @to_do.id %> details
+</h1>
+
+<a href="/to_dos/<%= @to_do.id %>/edit">
+  Edit to do
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Body
+  </dt>
+  <dd>
+    <%= @to_do.body %>
+  </dd>
+
+  <dt>
+    User
+  </dt>
+  <dd>
+    <%= @to_do.user_id %>
+  </dd>
+
+  <dt>
+    Role
+  </dt>
+  <dd>
+    <%= @to_do.role_id %>
+  </dd>
+
+  <dt>
+    Done
+  </dt>
+  <dd>
+    <%= @to_do.done %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@to_do.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@to_do.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_to_do/<%= @to_do.id %>">
+  Delete to do
+</a>
+
+<hr>
+
+<a href="/to_dos">
+  Go back
+</a>

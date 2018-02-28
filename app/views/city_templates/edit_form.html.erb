@@ -1,0 +1,35 @@
+<!-- Validation failure messages -->
+<% if @city.errors.any? %>
+  <% @city.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit city #<%= @city.id %>
+</h1>
+
+<hr>
+
+<form action="/update_city/<%= @city.id %>" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @city.name %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update city
+  </button>
+</form>
+
+<hr>
+
+<a href="/cities">
+  Go back
+</a>

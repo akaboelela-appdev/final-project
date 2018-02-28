@@ -1,0 +1,42 @@
+<h1>
+  Industry #<%= @industry.id %> details
+</h1>
+
+<a href="/industries/<%= @industry.id %>/edit">
+  Edit industry
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @industry.name %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@industry.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@industry.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_industry/<%= @industry.id %>">
+  Delete industry
+</a>
+
+<hr>
+
+<a href="/industries">
+  Go back
+</a>

@@ -1,0 +1,58 @@
+<h1>
+  All cities
+</h1>
+
+<a href="/cities/new">
+  Add a new city
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Name
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @cities.each do |city| %>
+  <tr>
+    <td>
+      <%= city.id %>
+    </td>
+
+    <td>
+      <%= city.name %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(city.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(city.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/cities/<%= city.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      FinalProject
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsible-nav-links">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/users" class="nav-link">
+            Users
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/statuses" class="nav-link">
+            Statuses
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/coveragegroups" class="nav-link">
+            Coveragegroups
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/contacts" class="nav-link">
+            Contacts
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/companies" class="nav-link">
+            Companies
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/priorities" class="nav-link">
+            Priorities
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/to_dos" class="nav-link">
+            To Dos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/bookmarks" class="nav-link">
+            Bookmarks
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/industries" class="nav-link">
+            Industries
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/notes" class="nav-link">
+            Notes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cities" class="nav-link">
+            Cities
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/roles" class="nav-link">
+            Roles
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <% if current_user.blank? %>
+          <li class="nav-item">
+            <a href="/users/sign_in" class="nav-link">
+              Sign in
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/users/sign_up" class="nav-link">
+              Sign up
+            </a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a href="/users/edit" class="nav-link">
+              Edit profile
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/users/sign_out" data-method="delete" class="nav-link">
+              Sign out
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div> <!-- .navbar-collapse -->
+  </div> <!-- .container -->
+</nav>

@@ -1,0 +1,71 @@
+<!-- Validation failure messages -->
+<% if @note.errors.any? %>
+  <% @note.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit note #<%= @note.id %>
+</h1>
+
+<hr>
+
+<form action="/update_note/<%= @note.id %>" method="post">
+  <!-- Label and input for body -->
+  <div class="form-group">
+    <label for="body">
+      Body
+    </label>
+
+    <textarea id="body" name="body" class="form-control" rows="3"><%= @note.body %></textarea>
+  </div>
+
+  <!-- Label and input for company_id -->
+  <div class="form-group">
+    <label for="company_id">
+      Company
+    </label>
+
+    <input type="text" id="company_id" name="company_id" class="form-control" value="<%= @note.company_id %>">
+  </div>
+
+  <!-- Label and input for user_id -->
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @note.user_id %>">
+  </div>
+
+  <!-- Label and input for role_id -->
+  <div class="form-group">
+    <label for="role_id">
+      Role
+    </label>
+
+    <input type="text" id="role_id" name="role_id" class="form-control" value="<%= @note.role_id %>">
+  </div>
+
+  <!-- Label and input for contact_id -->
+  <div class="form-group">
+    <label for="contact_id">
+      Contact
+    </label>
+
+    <input type="text" id="contact_id" name="contact_id" class="form-control" value="<%= @note.contact_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update note
+  </button>
+</form>
+
+<hr>
+
+<a href="/notes">
+  Go back
+</a>

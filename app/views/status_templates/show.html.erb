@@ -1,0 +1,42 @@
+<h1>
+  Status #<%= @status.id %> details
+</h1>
+
+<a href="/statuses/<%= @status.id %>/edit">
+  Edit status
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @status.name %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@status.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@status.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_status/<%= @status.id %>">
+  Delete status
+</a>
+
+<hr>
+
+<a href="/statuses">
+  Go back
+</a>

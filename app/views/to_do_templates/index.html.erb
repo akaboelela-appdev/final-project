@@ -1,0 +1,82 @@
+<h1>
+  All to dos
+</h1>
+
+<a href="/to_dos/new">
+  Add a new to do
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Body
+    </th>
+
+    <th>
+      User
+    </th>
+
+    <th>
+      Role
+    </th>
+
+    <th>
+      Done
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @to_dos.each do |to_do| %>
+  <tr>
+    <td>
+      <%= to_do.id %>
+    </td>
+
+    <td>
+      <%= to_do.body %>
+    </td>
+
+    <td>
+      <%= to_do.user_id %>
+    </td>
+
+    <td>
+      <%= to_do.role_id %>
+    </td>
+
+    <td>
+      <%= to_do.done %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(to_do.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(to_do.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/to_dos/<%= to_do.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

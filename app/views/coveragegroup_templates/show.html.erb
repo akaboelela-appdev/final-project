@@ -1,0 +1,42 @@
+<h1>
+  Coveragegroup #<%= @coveragegroup.id %> details
+</h1>
+
+<a href="/coveragegroups/<%= @coveragegroup.id %>/edit">
+  Edit coveragegroup
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @coveragegroup.name %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@coveragegroup.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@coveragegroup.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_coveragegroup/<%= @coveragegroup.id %>">
+  Delete coveragegroup
+</a>
+
+<hr>
+
+<a href="/coveragegroups">
+  Go back
+</a>

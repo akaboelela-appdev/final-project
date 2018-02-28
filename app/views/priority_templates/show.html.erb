@@ -1,0 +1,42 @@
+<h1>
+  Priority #<%= @priority.id %> details
+</h1>
+
+<a href="/priorities/<%= @priority.id %>/edit">
+  Edit priority
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @priority.name %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@priority.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@priority.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_priority/<%= @priority.id %>">
+  Delete priority
+</a>
+
+<hr>
+
+<a href="/priorities">
+  Go back
+</a>

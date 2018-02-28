@@ -1,0 +1,35 @@
+<!-- Validation failure messages -->
+<% if @priority.errors.any? %>
+  <% @priority.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit priority #<%= @priority.id %>
+</h1>
+
+<hr>
+
+<form action="/update_priority/<%= @priority.id %>" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @priority.name %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update priority
+  </button>
+</form>
+
+<hr>
+
+<a href="/priorities">
+  Go back
+</a>

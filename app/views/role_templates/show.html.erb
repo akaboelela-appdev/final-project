@@ -1,0 +1,70 @@
+<h1>
+  Role #<%= @role.id %> details
+</h1>
+
+<a href="/roles/<%= @role.id %>/edit">
+  Edit role
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Title
+  </dt>
+  <dd>
+    <%= @role.title %>
+  </dd>
+
+  <dt>
+    City
+  </dt>
+  <dd>
+    <%= @role.city_id %>
+  </dd>
+
+  <dt>
+    Coveragegroup
+  </dt>
+  <dd>
+    <%= @role.coveragegroup_id %>
+  </dd>
+
+  <dt>
+    Company
+  </dt>
+  <dd>
+    <%= @role.company_id %>
+  </dd>
+
+  <dt>
+    Due date
+  </dt>
+  <dd>
+    <%= @role.due_date %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@role.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@role.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_role/<%= @role.id %>">
+  Delete role
+</a>
+
+<hr>
+
+<a href="/roles">
+  Go back
+</a>

@@ -1,0 +1,74 @@
+<h1>
+  All companies
+</h1>
+
+<a href="/companies/new">
+  Add a new company
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Name
+    </th>
+
+    <th>
+      Logo src
+    </th>
+
+    <th>
+      Industry
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @companies.each do |company| %>
+  <tr>
+    <td>
+      <%= company.id %>
+    </td>
+
+    <td>
+      <%= company.name %>
+    </td>
+
+    <td>
+      <%= company.logo_src %>
+    </td>
+
+    <td>
+      <%= company.industry_id %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(company.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(company.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/companies/<%= company.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>
