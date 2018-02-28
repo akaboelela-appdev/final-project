@@ -1,70 +1,83 @@
-<h1>
-  Role #<%= @role.id %> details
-</h1>
-
-<a href="/roles/<%= @role.id %>/edit">
-  Edit role
-</a>
+<h2>
+  <%=Coveragegroup.find(@role.coveragegroup_id).name + " " + @role.title + " at " + Company.find(@role.company_id).name + " in " + City.find(@role.city_id).name%>
+</h2>
 
 <hr>
 
-<dl>
-  <dt>
-    Title
-  </dt>
-  <dd>
-    <%= @role.title %>
-  </dd>
-
-  <dt>
-    City
-  </dt>
-  <dd>
-    <%= @role.city_id %>
-  </dd>
-
-  <dt>
-    Coveragegroup
-  </dt>
-  <dd>
-    <%= @role.coveragegroup_id %>
-  </dd>
-
-  <dt>
-    Company
-  </dt>
-  <dd>
-    <%= @role.company_id %>
-  </dd>
-
-  <dt>
-    Due date
-  </dt>
-  <dd>
-    <%= @role.due_date %>
-  </dd>
-
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@role.created_at) %> ago
-  </dd>
-
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@role.updated_at) %> ago
-  </dd>
-</dl>
-
-<a href="/delete_role/<%= @role.id %>">
-  Delete role
-</a>
+<h3>ToDos</h3>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <% if @role.to_dos.exists? %>
+      <% @role.to_dos.where(user_id: current_user.id).each do |todo| %>
+        <li class="list-group-item">
+          <div class="float-left">
+            <%=todo.body%>
+          </div>
+          <div class="float-right">
+            <% if todo.done == true %>
+              <form action="/update_to_do/<%=todo.id%>" method="post">
+                <input type="hidden" name="user_id" value="<%=current_user.id%>">
+                <input type="hidden" name="role_id" value="<%=@role.id%>">
+                <input type="hidden" name="done" value="<%=false%>">
+                <input type="hidden" name="body" value="<%=todo.body%>">
+                <button type="submit" style="border:0px;"><i class="far fa-check-square"></i></button>
+              </form>
+            <% else %>
+              <form action="/update_to_do/<%=todo.id%>" method="post">
+                <input type="hidden" name="user_id" value="<%=current_user.id%>">
+                <input type="hidden" name="role_id" value="<%=@role.id%>">
+                <input type="hidden" name="done" value="<%=true%>">
+                <input type="hidden" name="body" value="<%=todo.body%>">
+                <button type="submit" style="border:0px;"><i class="far fa-square"></i></button>
+              </form>
+            <% end %>
+          </div>
+        </li>
+      <%end%>
+    <%end%>
+    <li class="list-group-item">
+      <form action="/create_to_do" method="post">
+        <input type="hidden" name="user_id" value="<%=current_user.id%>">
+        <input type="hidden" name="role_id" value="<%=@role.id%>">
+        <input type="hidden" name="done" value="<%=false%>">
+        <div class="input-group">
+          <input type="text" class="form-control" name="body" placeholder="...add a todo">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+    </li>
+  </ul>
+</div>
 
 <hr>
 
-<a href="/roles">
-  Go back
-</a>
+<% company = Company.find(@role.company_id)%>
+<h3>Contacts at <%=company.name%></h3>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <%company.contacts.each do |contact| %>
+      <li class="list-group-item">
+        <%= contact.name + " (" + contact.title + ")" %>
+      </li>
+    <%end%>
+  </ul>
+</div>
+<hr>
+<h4>Add a New Contact</h4>
+<form action="/create_contact" method="post">
+  <input type="hidden" name="user_id" value="<%=current_user.id%>">
+  <input type="hidden" name="company_id" value="<%=company.id%>">
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+    <input type="text" class="form-control" name="name" id="name">
+  </div>
+  <div class="form-group">
+    <label for="title">
+      Title
+    </label>
+    <input type="text" class="form-control" name="title" id="title">
+  </div>
+  <button type="submit" class="btn btn-primary">Add Contact</button>
+</form>

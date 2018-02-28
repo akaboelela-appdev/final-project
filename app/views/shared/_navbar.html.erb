@@ -11,63 +11,13 @@
     <div class="collapse navbar-collapse" id="collapsible-nav-links">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a href="/users" class="nav-link">
-            Users
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/statuses" class="nav-link">
-            Statuses
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/coveragegroups" class="nav-link">
-            Coveragegroups
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/contacts" class="nav-link">
-            Contacts
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/companies" class="nav-link">
-            Companies
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/priorities" class="nav-link">
-            Priorities
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/to_dos" class="nav-link">
-            To Dos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/bookmarks" class="nav-link">
-            Bookmarks
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/industries" class="nav-link">
-            Industries
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/notes" class="nav-link">
-            Notes
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/cities" class="nav-link">
-            Cities
-          </a>
-        </li>
-        <li class="nav-item">
           <a href="/roles" class="nav-link">
-            Roles
+            All Roles
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/search" class="nav-link">
+            Search
           </a>
         </li>
       </ul>
@@ -86,8 +36,23 @@
           </li>
         <% else %>
           <li class="nav-item">
+            <a href="/bookmarks" class="nav-link">
+              My roles
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/contacts" class="nav-link">
+              My Contacts
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/to_dos" class="nav-link">
+              My ToDo's
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/users/edit" class="nav-link">
-              Edit profile
+              <%= current_user.email %>
             </a>
           </li>
 
@@ -98,6 +63,8 @@
           </li>
         <% end %>
       </ul>
-    </div> <!-- .navbar-collapse -->
-  </div> <!-- .container -->
+    </div>
+    <!-- .navbar-collapse -->
+  </div>
+  <!-- .container -->
 </nav>

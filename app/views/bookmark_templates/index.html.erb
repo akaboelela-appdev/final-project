@@ -1,79 +1,63 @@
-<h1>
-  All bookmarks
-</h1>
-
-<a href="/bookmarks/new">
-  Add a new bookmark
-</a>
-
-<hr>
-
+<h3>Bookmarked Roles</h3>
 <table class="table">
   <tr>
+
     <th>
-      ID
+      Title
     </th>
 
     <th>
-      Role
+      City
     </th>
 
     <th>
-      User
+      Coveragegroup
     </th>
 
     <th>
-      Priority
+      Company
     </th>
 
     <th>
-      Status
+      Due date
     </th>
-
+    
     <th>
-      Created at
     </th>
-
-    <th>
-      Updated at
-    </th>
-
     <th>
     </th>
   </tr>
 
-  <% @bookmarks.each do |bookmark| %>
+  <% @bookmarked_roles.each do |role| %>
   <tr>
     <td>
-      <%= bookmark.id %>
+      <%= role.title %>
     </td>
 
     <td>
-      <%= bookmark.role_id %>
+      <%= City.find(role.city_id).name %>
     </td>
 
     <td>
-      <%= bookmark.user_id %>
+      <%= Coveragegroup.find(role.coveragegroup_id).name %>
     </td>
 
     <td>
-      <%= bookmark.priority_id %>
+      <%= Company.find(role.company_id).name %>
     </td>
 
     <td>
-      <%= bookmark.status_id %>
+      <%= role.due_date %>
+    </td>
+    
+    <td>
+      <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
+        <i class="fas fa-star"></i>
+      </a>
     </td>
 
     <td>
-      <%= time_ago_in_words(bookmark.created_at) %> ago
-    </td>
-
-    <td>
-      <%= time_ago_in_words(bookmark.updated_at) %> ago
-    </td>
-
-    <td>
-      <a href="/bookmarks/<%= bookmark.id %>">
+      <a href="/roles/<%= role.id %>">
         Show details
       </a>
     </td>

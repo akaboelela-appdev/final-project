@@ -40,7 +40,16 @@
       Industry
     </label>
 
-    <input type="text" id="industry_id" name="industry_id" class="form-control" value="<%= @company.try(:industry_id) %>">
+    <%=
+      select_tag("industry_id",
+        options_from_collection_for_select(
+          Industry.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
   </div>
 
   <button class="btn btn-block btn-outline-secondary">

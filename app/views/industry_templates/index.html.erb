@@ -1,58 +1,23 @@
 <h1>
-  All industries
+  All Industries
 </h1>
 
-<a href="/industries/new">
+<a href="/industry/new">
   Add a new industry
 </a>
 
 <hr>
 
 <table class="table">
-  <tr>
-    <th>
-      ID
-    </th>
-
-    <th>
-      Name
-    </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
-    </th>
-
-    <th>
-    </th>
-  </tr>
-
   <% @industries.each do |industry| %>
   <tr>
     <td>
-      <%= industry.id %>
-    </td>
-
-    <td>
-      <%= industry.name %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(industry.created_at) %> ago
-    </td>
-
-    <td>
-      <%= time_ago_in_words(industry.updated_at) %> ago
-    </td>
-
-    <td>
-      <a href="/industries/<%= industry.id %>">
-        Show details
+      <a href="/industries/<%=industry.id%>">
+        <%=industry.name%>
       </a>
     </td>
   </tr>
   <% end %>
 </table>
+
+<!-- CONVERT TO CARDS -->

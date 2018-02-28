@@ -1,0 +1,45 @@
+<h1>Search by</h1>
+
+<h2>Industries</h2>
+<div class="card-columns">
+  <% @industries.each do |industry|%>
+    <div class="card pt-2 text-center">
+      <div class="card-block">
+        <h4 class="card-title"><a href="/industries/<%=industry.id%>"><%=industry.name%></a></h4>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+<h2>Companies</h2>
+<div class="card-columns">
+  <% @companies.each do |company|%>
+    <div class="card pt-2 text-center">
+      <div class="card-block">
+        <h4 class="card-title"><a href="/companies/<%=company.id%>"><%=company.name%></a></h4>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+<h2>Coverage Groups</h2>
+<div class="card-columns">
+  <% @coveragegroups.each do |coveragegroup|%>
+    <div class="card pt-2 text-center">
+      <div class="card-block">
+        <h4 class="card-title"><a href="/coveragegroups/<%=coveragegroup.id%>"><%=coveragegroup.name%></a></h4>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+<h2>Cities</h2>
+<div class="card-columns">
+  <% @cities.each do |city|%>
+    <div class="card pt-2 text-center">
+      <div class="card-block">
+        <h4 class="card-title"><a href="/cities/<%=city.id%>"><%=city.name%></a></h4>
+      </div>
+    </div>
+  <%end%>
+</div>

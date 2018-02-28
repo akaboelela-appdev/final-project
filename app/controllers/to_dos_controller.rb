@@ -49,7 +49,8 @@ class ToDosController < ApplicationController
     if @to_do.valid?
       @to_do.save
 
-      redirect_to("/to_dos/#{@to_do.id}", :notice => "To do updated successfully.")
+      #redirect_to("/to_dos/#{@to_do.id}", :notice => "To do updated successfully.")
+      redirect_back(fallback_location: '/to_dos/#{@to_do.id}')
     else
       render("to_do_templates/edit_form.html.erb")
     end

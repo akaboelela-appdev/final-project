@@ -1,10 +1,6 @@
 class RolesController < ApplicationController
   def index
     @roles = Role.all
-    @bookmarked_roles = []
-    Bookmark.where(user_id: current_user.id).each do |bookmark|
-      @bookmarked_roles.push(Role.find(bookmark.role_id))
-    end
 
     render("role_templates/index.html.erb")
   end

@@ -11,4 +11,6 @@
 #
 
 class Company < ApplicationRecord
+  has_many :roles
+  has_many :contacts
 end

@@ -15,4 +15,5 @@
 class Role < ApplicationRecord
   has_many :to_dos
   has_many :user, through: :bookmarks
+  belongs_to :company
 end

@@ -1,62 +1,23 @@
 <h1>
-  Search Roles by
+  All companies
 </h1>
 
-<form action="/search_results" method="post">
-  <!-- Label and input for city_id -->
-  <div class="form-group">
-    <label for="city_id">
-      City
-    </label>
+<a href="/company/new">
+  Add a new company
+</a>
 
-    <%=
-      select_tag("city_id",
-        options_from_collection_for_select(
-          City.all.order(:name), # collection to loop over
-          :id, # attribute to use for the value as a symbol
-          :name, # attribute to use as the content as a symbol
-        ),
-        {class: "form-control"}
-      )
-    %>
-  </div>
+<hr>
 
-  <!-- Label and input for coveragegroup_id -->
-  <div class="form-group">
-    <label for="coveragegroup_id">
-      Coveragegroup
-    </label>
-    <%=
-      select_tag("coveragegroup_id",
-        options_from_collection_for_select(
-          Coveragegroup.all.order(:name), # collection to loop over
-          :id, # attribute to use for the value as a symbol
-          :name, # attribute to use as the content as a symbol
-        ),
-        {class: "form-control"}
-      )
-    %>
-  </div>
+<table class="table">
+  <% @companies.each do |company| %>
+  <tr>
+    <td>
+      <a href="/companies/<%=company.id%>">
+        <img src="<%=company.logo_src%>"
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>
 
-  <!-- Label and input for company_id -->
-  <div class="form-group">
-    <label for="company_id">
-      Company
-    </label>
-
-    <%=
-      select_tag("company_id",
-        options_from_collection_for_select(
-          Company.all.order(:name), # collection to loop over
-          :id, # attribute to use for the value as a symbol
-          :name, # attribute to use as the content as a symbol
-        ),
-        {class: "form-control"}
-      )
-    %>
-  </div>
-
-  <button class="btn btn-block btn-outline-secondary">
-    Search
-  </button>
-</form>
+<!-- CONVERT TO CARDS -->
