@@ -4,7 +4,13 @@
   <div class="card mb-2">
     <div class="card-body pb-1 pt-3">
       <div class="float-left">
-        <h5 class="card-title"><a href="/roles/<%=role.id%>"><%=Coveragegroup.find(role.coveragegroup_id).name + " " +role.title+ " at " + Company.find(role.company_id).name + " in " + City.find(role.city_id).name%></a></h5>
+        <h5 class="card-title">
+          <a href="/coveragroups/<%=Coveragegroup.find(role.coveragegroup_id).id%>"><%=Coveragegroup.find(role.coveragegroup_id).name%></a>
+          <%=role.title%>
+          <a href="/companies/<%=Company.find(role.company_id).id%>"><%=Company.find(role.company_id).name%></a>
+          in
+          <a href="/cities/<%=City.find(role.city_id).id%>"><%=City.find(role.city_id).name%></a>
+        </h5>
       </div>
       <div class="float-right mr-1">
         <% if Bookmark.where(user_id: current_user.id).where(role_id: role.id).exists? %>
@@ -30,7 +36,7 @@
           <li class="list-group-item">
             <div class="float-left">
               <a href="/delete_to_do/<%=todo.id%>"><i class="fas fa-trash-alt"></i></a>
-                <%=todo.body%>
+              <%=todo.body%>
             </div>
             <div class="float-right">
               <% if todo.done == true %>

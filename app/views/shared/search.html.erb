@@ -11,7 +11,7 @@
         <li>
           <form action="/create_city" method="post">
             <input type="text" class="form-control" id="name" name="name" placeholder="Add a City">
-            <button class="btn btn-primary form-control" type="submit">Add City</button>
+            <button class="btn btn-outline-primary form-control" type="submit">Add City</button>
           </form>
         </li>
       </ul>
@@ -22,12 +22,12 @@
       <h4 class="card-title ml-3 mt-3">Coverage Group</h4>
       <ul class="list-group list-group-flush">
         <% @coveragegroups.each do |coveragegroup|%>
-          <li class="list-group-item"><a href="/coveragegroup/<%=coveragegroup.id%>"><%=coveragegroup.name%></a></li>
+          <li class="list-group-item"><a href="/coveragegroups/<%=coveragegroup.id%>"><%=coveragegroup.name%></a></li>
         <%end%>
         <li>
           <form action="/create_coveragegroup" method="post">
             <input type="text" class="form-control" id="name" name="name" placeholder="Add a Coverage Group">
-            <button class="btn btn-primary form-control" type="submit">Add Coverage Group</button>
+            <button class="btn btn-outline-primary form-control" type="submit">Add Coverage Group</button>
           </form>
         </li>
       </ul>
@@ -43,7 +43,7 @@
         <li>
           <form action="/create_industry" method="post">
             <input type="text" class="form-control" id="name" name="name" placeholder="Add an Industry">
-            <button class="btn btn-primary form-control" type="submit">Add Industry</button>
+            <button class="btn btn-outline-primary form-control" type="submit">Add Industry</button>
           </form>
         </li>
       </ul>
@@ -70,7 +70,7 @@
         )
         %>
         <input type="hidden" name="logo_src" value="#">
-            <button class="btn btn-primary form-control" type="submit">Add Company</button>
+            <button class="btn btn-outline-primary form-control" type="submit">Add Company</button>
           </form>
         </li>
       </ul>

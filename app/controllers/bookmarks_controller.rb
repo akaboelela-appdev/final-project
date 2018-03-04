@@ -30,7 +30,8 @@ class BookmarksController < ApplicationController
     if @bookmark.valid?
       @bookmark.save
 
-      redirect_to("/bookmarks", :notice => "Bookmark created successfully.")
+      #redirect_to("/bookmarks", :notice => "Bookmark created successfully.")
+      redirect_back(fallback_location: "/")
     else
       render("bookmark_templates/new_form.html.erb")
     end
@@ -64,6 +65,7 @@ class BookmarksController < ApplicationController
 
     @bookmark.destroy
 
-    redirect_to("/bookmarks", :notice => "Bookmark deleted successfully.")
+    #redirect_to("/bookmarks", :notice => "Bookmark deleted successfully.")
+    redirect_back(fallback_location: "/")
   end
 end

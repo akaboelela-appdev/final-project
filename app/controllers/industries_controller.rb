@@ -7,6 +7,7 @@ class IndustriesController < ApplicationController
 
   def show
     @industry = Industry.find(params.fetch("id_to_display"))
+    
 
     render("industry_templates/show.html.erb")
   end

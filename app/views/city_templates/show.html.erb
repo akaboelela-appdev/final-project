@@ -1,42 +1,94 @@
-<h1>
-  City #<%= @city.id %> details
-</h1>
+<h3>Roles in <%=@city.name%></h3>
 
-<a href="/cities/<%= @city.id %>/edit">
-  Edit city
-</a>
-
+<ul class="list-group list-group-flush">
+  <%@city.roles.each do |role| %>
+    <div class="card mb-2">
+      <div class="card-body pb-1 pt-3">
+        <div class="float-left">
+          <h5 class="card-title">
+            <a href="/coveragroups/<%=Coveragegroup.find(role.coveragegroup_id).id%>"><%=Coveragegroup.find(role.coveragegroup_id).name%></a>
+            <%=role.title%>
+            <a href="/companies/<%=Company.find(role.company_id).id%>"><%=Company.find(role.company_id).name%></a>
+          </h5>
+        </div>
+        <div class="float-right mr-4">
+          <% if Bookmark.where(user_id: current_user.id).where(role_id: role.id).exists? %>
+            <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
+              <i class="fas fa-star"></i>
+            </a>
+          <% else %>
+            <form action="/create_bookmark" method="post" id="myform">
+              <input type="hidden" name="user_id" value="<%=current_user.id%>">
+              <input type="hidden" name="role_id" value="<%=role.id%>">
+              <input type="hidden" name="priority_id" value="2">
+              <input type="hidden" name="status_id" value="1">
+              <a href="#" onclick="document.getElementById('myform').submit()">
+                <i class="far fa-star"></i>
+              </a>
+            </form>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</ul>
 <hr>
 
-<dl>
-  <dt>
-    Name
-  </dt>
-  <dd>
-    <%= @city.name %>
-  </dd>
+<h3>Add a New role in <%=@city.name%></h3>
+<form action="/create_role" method="post">
+  <!-- Label and input for title -->
+  <div class="form-group">
+    <label for="title">
+      Title
+    </label>
 
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@city.created_at) %> ago
-  </dd>
+    <input type="text" id="title" name="title" class="form-control" value="<%= @role.try(:title) %>">
+  </div>
 
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@city.updated_at) %> ago
-  </dd>
-</dl>
+  <input type="hidden" name="city_id" value="<%=@city.id%>">
 
-<a href="/delete_city/<%= @city.id %>">
-  Delete city
-</a>
+  <!-- Label and input for coveragegroup_id -->
+  <div class="form-group">
+    <label for="coveragegroup_id">
+      Coveragegroup
+    </label>
 
-<hr>
+    <%=
+      select_tag("coveragegroup_id",
+        options_from_collection_for_select(
+          Coveragegroup.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
 
-<a href="/cities">
+  <!-- Label and input for company_id -->
+  <div class="form-group">
+    <label for="company_id">
+      Company
+    </label>
+
+    <%=
+      select_tag("company_id",
+        options_from_collection_for_select(
+          Company.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create role!
+  </button>
+</form>
+
+
+<a href="/bookmarks">
   Go back
 </a>

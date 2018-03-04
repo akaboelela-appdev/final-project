@@ -1,42 +1,100 @@
 <h1>
-  Coveragegroup #<%= @coveragegroup.id %> details
+  <%=@coveragegroup.name%> Coverage Group
 </h1>
 
-<a href="/coveragegroups/<%= @coveragegroup.id %>/edit">
-  Edit coveragegroup
-</a>
+<hr>
+
+<h3>Roles in <%=@coveragegroup.name%></h3>
+<% @coveragegroup.roles.each do |role| %>
+  <div class="card mb-2">
+    <div class="card-body pb-1 pt-3">
+      <div class="float-left">
+        <h5 class="card-title">
+          <%=role.title%>
+          at
+          <a href="/companies/<%=Company.find(role.company_id).id%>"><%=Company.find(role.company_id).name%></a>
+          in
+          <a href="/cities/<%=City.find(role.city_id).id%>"><%=City.find(role.city_id).name%></a>
+        </h5>
+      </div>
+      <div class="float-right mr-4">
+          <% if Bookmark.where(user_id: current_user.id).where(role_id: role.id).exists? %>
+            <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
+              <i class="fas fa-star"></i>
+            </a>
+          <% else %>
+            <form action="/create_bookmark" method="post" id="myform">
+              <input type="hidden" name="user_id" value="<%=current_user.id%>">
+              <input type="hidden" name="role_id" value="<%=role.id%>">
+              <input type="hidden" name="priority_id" value="2">
+              <input type="hidden" name="status_id" value="1">
+              <a href="#" onclick="document.getElementById('myform').submit()">
+                <i class="far fa-star"></i>
+              </a>
+            </form>
+          <% end %>
+      </div>
+    </div>
+  </div>
+<%end%>
 
 <hr>
 
-<dl>
-  <dt>
-    Name
-  </dt>
-  <dd>
-    <%= @coveragegroup.name %>
-  </dd>
+<h3>Add a New role in <%=@coveragegroup.name%></h3>
+<form action="/create_role" method="post">
+  <!-- Label and input for title -->
+  <div class="form-group">
+    <label for="title">
+      Title
+    </label>
 
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@coveragegroup.created_at) %> ago
-  </dd>
+    <input type="text" id="title" name="title" class="form-control" value="<%= @role.try(:title) %>">
+  </div>
 
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@coveragegroup.updated_at) %> ago
-  </dd>
-</dl>
+  <!-- Label and input for city_id -->
+  <div class="form-group">
+    <label for="city_id">
+      City
+    </label>
 
-<a href="/delete_coveragegroup/<%= @coveragegroup.id %>">
-  Delete coveragegroup
-</a>
+    <%=
+      select_tag("city_id",
+        options_from_collection_for_select(
+          City.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
 
-<hr>
+  <input type="hidden" name="coveragegroup_id" value="<%=@coveragegroup.id%>"
 
-<a href="/coveragegroups">
+  <!-- Label and input for company_id -->
+  <div class="form-group">
+    <label for="company_id">
+      Company
+    </label>
+
+    <%=
+      select_tag("company_id",
+        options_from_collection_for_select(
+          Company.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create role!
+  </button>
+</form>
+
+
+<a href="/search">
   Go back
 </a>

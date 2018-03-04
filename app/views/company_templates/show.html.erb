@@ -1,13 +1,43 @@
-<div class="card mb-3">
-  <div class="card-block pt-2 pl-2">
-    <h4><%=@company.name%></h4>
+<h2><%=@company.name%></h2>
     <p class="card-title"><%= Industry.find(@company.industry_id).name + " Industry"%></p>
+
+<hr>
+<h4>Roles at <%=@company.name%></h4>
+<% @company.roles.each do |role| %>
+  <div class="card mb-2">
+    <div class="card-body pb-1 pt-3">
+      <div class="float-left">
+        <h5 class="card-title">
+          <a href="/coveragroups/<%=Coveragegroup.find(role.coveragegroup_id).id%>"><%=Coveragegroup.find(role.coveragegroup_id).name%></a>
+          <%=role.title%>
+          in
+          <a href="/cities/<%=City.find(role.city_id).id%>"><%=City.find(role.city_id).name%></a>
+        </h5>
+      </div>
+      <div class="float-right mr-4">
+          <% if Bookmark.where(user_id: current_user.id).where(role_id: role.id).exists? %>
+            <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
+              <i class="fas fa-star"></i>
+            </a>
+          <% else %>
+            <form action="/create_bookmark" method="post" id="myform">
+              <input type="hidden" name="user_id" value="<%=current_user.id%>">
+              <input type="hidden" name="role_id" value="<%=role.id%>">
+              <input type="hidden" name="priority_id" value="2">
+              <input type="hidden" name="status_id" value="1">
+              <a href="#" onclick="document.getElementById('myform').submit()">
+                <i class="far fa-star"></i>
+              </a>
+            </form>
+          <% end %>
+      </div>
+    </div>
   </div>
-</div>
+<%end%>
 
 <hr>
 
-<h3>Contacts at <%=@company.name%></h3>
+<h4>Contacts at <%=@company.name%></h4>
 <div class="card">
   <ul class="list-group list-group-flush">
     <%@company.contacts.each do |contact| %>
@@ -18,7 +48,7 @@
   </ul>
 </div>
 <hr>
-<h4>Add a New Contact</h4>
+<h4>Add a New Contact at <%=@company.name%></h4>
 <form action="/create_contact" method="post">
   <input type="hidden" name="user_id" value="<%=current_user.id%>">
   <input type="hidden" name="company_id" value="<%=@company.id%>">
@@ -39,10 +69,61 @@
 
 <hr>
 
-<a href="/companies">
-  Go back
-</a>
+<h4>Add a New role at <%=@company.name%></h4>
+<form action="/create_role" method="post">
+  <!-- Label and input for title -->
+  <div class="form-group">
+    <label for="title">
+      Title
+    </label>
 
-<a href="/companies/<%= @company.id %>/edit">
-  Edit company
+    <input type="text" id="title" name="title" class="form-control" value="<%= @role.try(:title) %>">
+  </div>
+
+  <input type="hidden" name="company_id" value="<%=@company.id%>">
+
+  <!-- Label and input for coveragegroup_id -->
+  <div class="form-group">
+    <label for="coveragegroup_id">
+      Coveragegroup
+    </label>
+
+    <%=
+      select_tag("coveragegroup_id",
+        options_from_collection_for_select(
+          Coveragegroup.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
+
+  <!-- Label and input for company_id -->
+  <div class="form-group">
+    <label for="city_id">
+      City
+    </label>
+
+    <%=
+      select_tag("city_id",
+        options_from_collection_for_select(
+          Company.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+      )
+    %>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create role!
+  </button>
+</form>
+
+
+<a href="/bookmarks">
+  Go back
 </a>

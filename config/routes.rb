@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root("roles#index")
+  root("bookmarks#index")
   get("/search", {:controller=>"search", :action => "index"})
   # Routes for the Note resource:
 
