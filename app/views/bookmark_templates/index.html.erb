@@ -4,12 +4,24 @@
   <div class="card mb-2">
     <div class="card-body pb-1 pt-3">
       <div class="float-left">
-        <h5 class="card-title"><%=Coveragegroup.find(role.coveragegroup_id).name + " " +role.title+ " at " + Company.find(role.company_id).name + " in " + City.find(role.city_id).name%></h5>
-    </div>
-    <div class="float-right">
-      <button class="btn btn-success">
-        <a href="/roles/<%=role.id%>" style="color:inherit;">See More</a>
-      </button>
+        <h5 class="card-title"><a href="/roles/<%=role.id%>"><%=Coveragegroup.find(role.coveragegroup_id).name + " " +role.title+ " at " + Company.find(role.company_id).name + " in " + City.find(role.city_id).name%></a></h5>
+      </div>
+      <div class="float-right mr-1">
+        <% if Bookmark.where(user_id: current_user.id).where(role_id: role.id).exists? %>
+          <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
+            <i class="fas fa-star"></i>
+          </a>
+        <% else %>
+          <form action="/create_bookmark" method="post" id="myform">
+            <input type="hidden" name="user_id" value="<%=current_user.id%>">
+            <input type="hidden" name="role_id" value="<%=role.id%>">
+            <input type="hidden" name="priority_id" value="2">
+            <input type="hidden" name="status_id" value="1">
+            <a href="#" onclick="document.getElementById('myform').submit()">
+              <i class="far fa-star"></i>
+            </a>
+          </form>
+        <% end %>
       </div>
     </div>
     <ul class="list-group list-group-flush">
@@ -17,7 +29,8 @@
         <% role.to_dos.where(user_id: current_user.id).each do |todo| %>
           <li class="list-group-item">
             <div class="float-left">
-              <%=todo.body%>
+              <a href="/delete_to_do/<%=todo.id%>"><i class="fas fa-trash-alt"></i></a>
+                <%=todo.body%>
             </div>
             <div class="float-right">
               <% if todo.done == true %>
@@ -48,7 +61,7 @@
           <input type="hidden" name="done" value="<%=false%>">
           <div class="input-group">
             <input type="text" class="form-control" name="body" placeholder="...add a todo">
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary">Add Todo</button>
           </div>
         </form>
       </li>

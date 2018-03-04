@@ -56,16 +56,12 @@
         </td>
 
         <td>
-          <button class="btn btn-warning">
             <a href="/contacts/<%= contact.id %>/edit" style="text-decoration:none;color:inherit;">
-              Edit
+              <i class="far fa-edit"></i>
             </a>
-          </button>
-          <button class="btn btn-danger">
             <a href="/contact_to_delete/<%= contact.id %>" style="text-decoration:none;color:inherit;">
-              Delete
+              <i class="fas fa-trash-alt"></i>
             </a>
-          </button>
         </td>
       </tr>
     <% end %>

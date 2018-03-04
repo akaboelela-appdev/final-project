@@ -1,45 +1,79 @@
 <h1>Search by</h1>
 
-<h2>Industries</h2>
-<div class="card-columns">
-  <% @industries.each do |industry|%>
-    <div class="card pt-2 text-center">
-      <div class="card-block">
-        <h4 class="card-title"><a href="/industries/<%=industry.id%>"><%=industry.name%></a></h4>
-      </div>
+<div class="card-group">
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title ml-3 mt-3">City</h4>
+      <ul class="list-group list-group-flush">
+        <% @cities.each do |city|%>
+          <li class="list-group-item"><a href="/cities/<%=city.id%>"><%=city.name%></a></li>
+        <%end%>
+        <li>
+          <form action="/create_city" method="post">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Add a City">
+            <button class="btn btn-primary form-control" type="submit">Add City</button>
+          </form>
+        </li>
+      </ul>
     </div>
-  <%end%>
-</div>
-
-<h2>Companies</h2>
-<div class="card-columns">
-  <% @companies.each do |company|%>
-    <div class="card pt-2 text-center">
-      <div class="card-block">
-        <h4 class="card-title"><a href="/companies/<%=company.id%>"><%=company.name%></a></h4>
-      </div>
+  </div>
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title ml-3 mt-3">Coverage Group</h4>
+      <ul class="list-group list-group-flush">
+        <% @coveragegroups.each do |coveragegroup|%>
+          <li class="list-group-item"><a href="/coveragegroup/<%=coveragegroup.id%>"><%=coveragegroup.name%></a></li>
+        <%end%>
+        <li>
+          <form action="/create_coveragegroup" method="post">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Add a Coverage Group">
+            <button class="btn btn-primary form-control" type="submit">Add Coverage Group</button>
+          </form>
+        </li>
+      </ul>
     </div>
-  <%end%>
-</div>
-
-<h2>Coverage Groups</h2>
-<div class="card-columns">
-  <% @coveragegroups.each do |coveragegroup|%>
-    <div class="card pt-2 text-center">
-      <div class="card-block">
-        <h4 class="card-title"><a href="/coveragegroups/<%=coveragegroup.id%>"><%=coveragegroup.name%></a></h4>
-      </div>
+  </div>
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title ml-3 mt-3">Industry</h4>
+      <ul class="list-group list-group-flush">
+        <% @industries.each do |industry|%>
+          <li class="list-group-item"><a href="/industries/<%=industry.id%>"><%=industry.name%></a></li>
+        <%end%>
+        <li>
+          <form action="/create_industry" method="post">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Add an Industry">
+            <button class="btn btn-primary form-control" type="submit">Add Industry</button>
+          </form>
+        </li>
+      </ul>
     </div>
-  <%end%>
-</div>
-
-<h2>Cities</h2>
-<div class="card-columns">
-  <% @cities.each do |city|%>
-    <div class="card pt-2 text-center">
-      <div class="card-block">
-        <h4 class="card-title"><a href="/cities/<%=city.id%>"><%=city.name%></a></h4>
-      </div>
+  </div>
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title ml-3 mt-3">Company</h4>
+      <ul class="list-group list-group-flush">
+        <% @companies.each do |company|%>
+          <li class="list-group-item"><a href="/companies/<%=company.id%>"><%=company.name%></a></li>
+        <%end%>
+        <li>
+          <form action="/create_company" method="post">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Add a Company">
+            <%=
+        select_tag("industry_id",
+        options_from_collection_for_select(
+          Industry.all.order(:name), # collection to loop over
+          :id, # attribute to use for the value as a symbol
+          :name, # attribute to use as the content as a symbol
+        ),
+        {class: "form-control"}
+        )
+        %>
+        <input type="hidden" name="logo_src" value="#">
+            <button class="btn btn-primary form-control" type="submit">Add Company</button>
+          </form>
+        </li>
+      </ul>
     </div>
-  <%end%>
+  </div>
 </div>

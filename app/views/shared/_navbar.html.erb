@@ -47,7 +47,7 @@
           </li>
           <li class="nav-item">
             <a href="/users/edit" class="nav-link">
-              <%= current_user.email %>
+              <%= current_user.email.split("@").first %>
             </a>
           </li>
 

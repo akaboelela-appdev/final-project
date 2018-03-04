@@ -50,7 +50,7 @@ class ToDosController < ApplicationController
       @to_do.save
 
       #redirect_to("/to_dos/#{@to_do.id}", :notice => "To do updated successfully.")
-      redirect_back(fallback_location: '/to_dos/#{@to_do.id}')
+      redirect_back(fallback_location: '/bookmarks', :notice => "To do updated successfully.")
     else
       render("to_do_templates/edit_form.html.erb")
     end
@@ -61,6 +61,7 @@ class ToDosController < ApplicationController
 
     @to_do.destroy
 
-    redirect_to("/to_dos", :notice => "To do deleted successfully.")
+    #redirect_to("/to_dos", :notice => "To do deleted successfully.")
+    redirect_back(fallback_location: '/bookmarks', :notice => "To do deleted successfully.")
   end
 end
