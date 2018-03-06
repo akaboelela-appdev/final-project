@@ -2,9 +2,15 @@
   <%=@coveragegroup.name%> Coverage Group
 </h1>
 
-<hr>
+<%if @coveragegroup.roles.exists? == false %>
+  <h4>There are no roles in <%=@coveragegroup.name%>. You can add a new one below</h4>
+<% else %>
+  <h3>Roles in <%=@coveragegroup.name%></h3>
+  <hr>
+<% end %>
 
-<h3>Roles in <%=@coveragegroup.name%></h3>
+
+
 <% @coveragegroup.roles.each do |role| %>
   <div class="card mb-2">
     <div class="card-body pb-1 pt-3">

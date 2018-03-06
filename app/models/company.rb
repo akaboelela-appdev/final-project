@@ -13,4 +13,5 @@
 class Company < ApplicationRecord
   has_many :roles
   has_many :contacts
+  validates :name, presence: true, uniqueness: true
 end

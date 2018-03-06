@@ -24,8 +24,6 @@ class BookmarksController < ApplicationController
 
     @bookmark.role_id = params.fetch("role_id")
     @bookmark.user_id = params.fetch("user_id")
-    @bookmark.priority_id = params.fetch("priority_id")
-    @bookmark.status_id = params.fetch("status_id")
 
     if @bookmark.valid?
       @bookmark.save
@@ -48,8 +46,6 @@ class BookmarksController < ApplicationController
 
     @bookmark.role_id = params.fetch("role_id")
     @bookmark.user_id = params.fetch("user_id")
-    @bookmark.priority_id = params.fetch("priority_id")
-    @bookmark.status_id = params.fetch("status_id")
 
     if @bookmark.valid?
       @bookmark.save

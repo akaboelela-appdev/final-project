@@ -2,7 +2,12 @@
     <p class="card-title"><%= Industry.find(@company.industry_id).name + " Industry"%></p>
 
 <hr>
-<h4>Roles at <%=@company.name%></h4>
+<%if @company.roles.exists? == false %>
+  <h4>There are no roles at <%=@company.name%>. You can add a new one below</h4>
+<% else %>
+  <h4>Roles at <%=@company.name%></h4>
+<%end%>
+
 <% @company.roles.each do |role| %>
   <div class="card mb-2">
     <div class="card-body pb-1 pt-3">
@@ -40,7 +45,8 @@
 <h4>Contacts at <%=@company.name%></h4>
 <div class="card">
   <ul class="list-group list-group-flush">
-    <%@company.contacts.each do |contact| %>
+    <% current_user.contacts.where(company_id: @company.id).each do |contact| %>
+    <%# Contact.where(user_id: current_user.id).where(company_id: @company.id).each do |contact| %>
       <li class="list-group-item">
         <%= contact.name + " (" + contact.title + ")" %>
       </li>

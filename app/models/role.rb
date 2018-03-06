@@ -18,5 +18,8 @@ class Role < ApplicationRecord
   belongs_to :company
   belongs_to :city
   belongs_to :coveragegroup
-  belongs_to :industry
+  validates :title, presence: true, uniqueness: {scope: [:company_id, :coveragegroup_id, :city_id]}
+  validates :city_id, presence: true
+  validates :coveragegroup_id, presence: true
+  validates :company_id, presence: true
 end

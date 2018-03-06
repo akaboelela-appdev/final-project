@@ -22,7 +22,6 @@ class RolesController < ApplicationController
     @role.city_id = params.fetch("city_id")
     @role.coveragegroup_id = params.fetch("coveragegroup_id")
     @role.company_id = params.fetch("company_id")
-    @role.due_date = params.fetch("due_date")
 
     if @role.valid?
       @role.save
@@ -46,7 +45,6 @@ class RolesController < ApplicationController
     @role.city_id = params.fetch("city_id")
     @role.coveragegroup_id = params.fetch("coveragegroup_id")
     @role.company_id = params.fetch("company_id")
-    @role.due_date = params.fetch("due_date")
 
     if @role.valid?
       @role.save

@@ -19,7 +19,6 @@ class CompaniesController < ApplicationController
     @company = Company.new
 
     @company.name = params.fetch("name")
-    @company.logo_src = params.fetch("logo_src")
     @company.industry_id = params.fetch("industry_id")
 
     if @company.valid?
@@ -41,7 +40,6 @@ class CompaniesController < ApplicationController
     @company = Company.find(params.fetch("id_to_modify"))
 
     @company.name = params.fetch("name")
-    @company.logo_src = params.fetch("logo_src")
     @company.industry_id = params.fetch("industry_id")
 
     if @company.valid?

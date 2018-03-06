@@ -10,6 +10,7 @@
 <% end %>
 
 <h2>All Roles</h2>
+<% myformid=1%>
 <% @roles.each do |role| %>
   <div class="card mb-2">
     <div class="card-body pb-1 pt-3">
@@ -17,6 +18,7 @@
         <h5 class="card-title">
           <a href="/coveragroups/<%=Coveragegroup.find(role.coveragegroup_id).id%>"><%=Coveragegroup.find(role.coveragegroup_id).name%></a>
           <%=role.title%>
+          at
           <a href="/companies/<%=Company.find(role.company_id).id%>"><%=Company.find(role.company_id).name%></a>
           in
           <a href="/cities/<%=City.find(role.city_id).id%>"><%=City.find(role.city_id).name%></a>
@@ -28,15 +30,16 @@
               <i class="fas fa-star"></i>
             </a>
           <% else %>
-            <form action="/create_bookmark" method="post" id="myform">
+            <form action="/create_bookmark" method="post" id="<%=myformid%>">
               <input type="hidden" name="user_id" value="<%=current_user.id%>">
               <input type="hidden" name="role_id" value="<%=role.id%>">
               <input type="hidden" name="priority_id" value="2">
               <input type="hidden" name="status_id" value="1">
-              <a href="#" onclick="document.getElementById('myform').submit()">
+              <a href="#" onclick="document.getElementById('<%=myformid%>').submit()">
                 <i class="far fa-star"></i>
               </a>
             </form>
+          <% myformid += 1 %>
           <% end %>
       </div>
     </div>

@@ -13,64 +13,20 @@
   My Contacts
 </h1>
 
-<a href="/contacts/new">
-  Add a new contact
-</a>
-
-<hr>
-
-<table class="table">
-  <tr>
-
-    <th>
-      Name
-    </th>
-
-    <th>
-      Title
-    </th>
-
-    <th>
-      Company
-    </th>
-
-    <th>
-    </th>
-  </tr>
-
-  <% @contacts.each do |contact| %>
-    <% if contact.user_id == current_user.id %>
-      <tr>
-        <td>
-          <%= contact.name %>
-        </td>
-
-        <td>
-          <%= contact.title %>
-        </td>
-
-        <td>
-          <a href="/companies/<%=contact.company_id%>">
-            <%= Company.find(contact.company_id).name %>
-          </a>
-        </td>
-
-        <td>
-            <a href="/contacts/<%= contact.id %>/edit" style="text-decoration:none;color:inherit;">
-              <i class="far fa-edit"></i>
-            </a>
-            <a href="/contact_to_delete/<%= contact.id %>" style="text-decoration:none;color:inherit;">
-              <i class="fas fa-trash-alt"></i>
-            </a>
-        </td>
-      </tr>
-    <% end %>
-  <% end %>
-</table>
-
-<h1>
-  Add a new contact
-</h1>
+<% if current_user.contacts.exists? == false %>
+  <h4>You have no contacts. You can add one below.</h4>
+<% else %>
+  <%current_user.contacts.each do |contact|%>
+    <div class="card mb-2">
+      <div class="card-body pb-1 pt-3">
+        <h5 class="card-title">
+          <%=contact.name%>
+        </h5>
+        <p style="color:black;"><%=contact.title + " at "%> <a href="/companies/<%=contact.company_id%>"><%=Company.find(contact.company_id).name%></a></p>
+      </div>
+    </div>
+<%end%>
+<% end %>
 
 <hr>
 

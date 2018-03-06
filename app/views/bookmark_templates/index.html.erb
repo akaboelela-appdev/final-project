@@ -1,4 +1,42 @@
-<h3>Bookmarked Roles</h3>
+<h2>Bookmarked Roles</h2>
+<hr>
+<%if Bookmark.where(user_id: current_user.id).exists? == false %>
+  <h4>You have no bookmarked roles. Add from existing roles below or click <a href="/search">here</a> to search</h4>
+<% myformid=1%>
+<% @roles.each do |role| %>
+  <div class="card mb-2">
+    <div class="card-body pb-1 pt-3">
+      <div class="float-left">
+        <h5 class="card-title">
+          <a href="/coveragroups/<%=Coveragegroup.find(role.coveragegroup_id).id%>"><%=Coveragegroup.find(role.coveragegroup_id).name%></a>
+          <%=role.title%>
+          <a href="/companies/<%=Company.find(role.company_id).id%>"><%=Company.find(role.company_id).name%></a>
+          in
+          <a href="/cities/<%=City.find(role.city_id).id%>"><%=City.find(role.city_id).name%></a>
+        </h5>
+      </div>
+      <div class="float-right mr-4">
+          <% if Bookmark.where(user_id: current_user.id).where(role_id: role.id).exists? %>
+            <a href="/delete_bookmark/<%=Bookmark.where(user_id: current_user.id).where(role_id: role.id).first.id%>">
+              <i class="fas fa-star"></i>
+            </a>
+          <% else %>
+            <form action="/create_bookmark" method="post" id="<%=myformid%>">
+              <input type="hidden" name="user_id" value="<%=current_user.id%>">
+              <input type="hidden" name="role_id" value="<%=role.id%>">
+              <input type="hidden" name="priority_id" value="2">
+              <input type="hidden" name="status_id" value="1">
+              <a href="#" onclick="document.getElementById('<%=myformid%>').submit()">
+                <i class="far fa-star"></i>
+              </a>
+            </form>
+          <% myformid += 1 %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+<%end%>
+<% end %>
 
 <% @bookmarked_roles.each do |role| %>
   <div class="card mb-2">

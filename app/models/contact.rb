@@ -14,4 +14,6 @@
 class Contact < ApplicationRecord
   belongs_to :company
   belongs_to :user
+  validates :name, presence: true, uniqueness: {scope: [:company_id]}
+  validates :company_id, presence: true
 end

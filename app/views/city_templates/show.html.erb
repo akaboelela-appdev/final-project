@@ -1,5 +1,9 @@
 <h3>Roles in <%=@city.name%></h3>
 
+<%if @city.roles.exists? == false %>
+  <h4>There are no roles in <%=@city.name%>. You can add a new one below</h4>
+<%end%>
+
 <ul class="list-group list-group-flush">
   <%@city.roles.each do |role| %>
     <div class="card mb-2">
@@ -8,6 +12,7 @@
           <h5 class="card-title">
             <a href="/coveragroups/<%=Coveragegroup.find(role.coveragegroup_id).id%>"><%=Coveragegroup.find(role.coveragegroup_id).name%></a>
             <%=role.title%>
+            at
             <a href="/companies/<%=Company.find(role.company_id).id%>"><%=Company.find(role.company_id).name%></a>
           </h5>
         </div>
