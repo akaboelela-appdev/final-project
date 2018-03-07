@@ -26,7 +26,8 @@ class RolesController < ApplicationController
     if @role.valid?
       @role.save
 
-      redirect_to("/roles", :notice => "Role created successfully.")
+      #redirect_to("/roles", :notice => "Role created successfully.")
+      redirect_back(fallback_location: "/roles")
     else
       render("role_templates/new_form.html.erb")
     end

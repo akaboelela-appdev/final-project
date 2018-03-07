@@ -26,7 +26,8 @@ class ContactsController < ApplicationController
     if @contact.valid?
       @contact.save
 
-      redirect_to("/contacts", :notice => "Contact created successfully.")
+      #redirect_to("/contacts", :notice => "Contact created successfully.")
+      redirect_back(fallback_location: "/contacts")
     else
       render("contact_templates/new_form.html.erb")
     end
