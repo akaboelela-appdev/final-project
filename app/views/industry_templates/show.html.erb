@@ -1,5 +1,3 @@
-<h1><%= @industry.name %> Industry</h1>
-
 <% company_count = @companies.count %>
 <% false_count = 0 %>
 <% @companies.each do |company| %>
@@ -11,7 +9,7 @@
 <% if company_count == false_count %>
 <h4>There are no roles in <%=@industry.name%>. You can add a new one below</h4>
 <% else %>
-<h2>Roles in <%= @industry.name %></h2>
+<h3>Roles in <%= @industry.name %></h3>
 <% @companies.each do |company| %>
   <% company.roles.each do |role| %>
     <div class="card mb-2">
@@ -52,7 +50,7 @@
 
 <hr>
 
-<h3>Add a New role in <%= @industry.name %></h3>
+<h4>Add a New role in <%= @industry.name %></h4>
 <form action="/create_role" method="post">
   <!-- Label and input for title -->
   <div class="form-group">

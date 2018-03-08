@@ -19,13 +19,11 @@
   <%current_user.contacts.each do |contact|%>
     <div class="card mb-2">
       <div class="card-body pb-1 pt-3 float-left">
+        <a href="delete_contact/<%=contact.id%>" class="float-right"><i class="fas fa-trash-alt"></i></a>
         <h5 class="card-title">
           <%=contact.name%>
         </h5>
         <p style="color:black;"><%=contact.title + " at "%> <a href="/companies/<%=contact.company_id%>"><%=Company.find(contact.company_id).name%></a></p>
-      </div>
-      <div class="float-right">
-        <a href="delete_contact/<%=contact.id%>"><i class="fas fa-trash-alt"></i></a>
       </div>
     </div>
   <% end %>

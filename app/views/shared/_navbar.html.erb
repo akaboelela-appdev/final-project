@@ -10,6 +10,7 @@
 
     <div class="collapse navbar-collapse" id="collapsible-nav-links">
       <ul class="navbar-nav mr-auto">
+        <% if current_user.blank? == false %>
         <li class="nav-item">
           <a href="/roles" class="nav-link">
             All Roles
@@ -20,6 +21,7 @@
             Search
           </a>
         </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav">
         <% if current_user.blank? %>

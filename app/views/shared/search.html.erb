@@ -10,7 +10,8 @@
         <%end%>
         <li>
           <form action="/create_city" method="post">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Add a City">
+            <label class="sr-only" for="city-name">City Name</label>
+            <input type="text" class="form-control" id="city-name" name="name" placeholder="Add a City">
             <button class="btn btn-outline-primary form-control" type="submit">Add City</button>
           </form>
         </li>
@@ -26,7 +27,8 @@
         <%end%>
         <li>
           <form action="/create_coveragegroup" method="post">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Add a Coverage Group">
+            <label class="sr-only" for="cg-name">Coverage Group Name</label>
+            <input type="text" class="form-control" id="cg-name" name="name" placeholder="Add a Coverage Group">
             <button class="btn btn-outline-primary form-control" type="submit">Add Coverage Group</button>
           </form>
         </li>
@@ -42,7 +44,8 @@
         <%end%>
         <li>
           <form action="/create_industry" method="post">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Add an Industry">
+            <label class="sr-only" for="industry-name">Industry Name</label>
+            <input type="text" class="form-control" id="industry-name" name="name" placeholder="Add an Industry">
             <button class="btn btn-outline-primary form-control" type="submit">Add Industry</button>
           </form>
         </li>
@@ -58,18 +61,19 @@
         <%end%>
         <li>
           <form action="/create_company" method="post">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Add a Company">
+            <label class="sr-only" for="company-name">Company Name</label>
+            <input type="text" class="form-control" id="company-name" name="name" placeholder="Add a Company">
             <%=
-        select_tag("industry_id",
-        options_from_collection_for_select(
-          Industry.all.order(:name), # collection to loop over
-          :id, # attribute to use for the value as a symbol
-          :name, # attribute to use as the content as a symbol
-        ),
-        {class: "form-control"}
-        )
-        %>
-        <input type="hidden" name="logo_src" value="#">
+            select_tag("industry_id",
+              options_from_collection_for_select(
+                Industry.all.order(:name), # collection to loop over
+                :id, # attribute to use for the value as a symbol
+                :name, # attribute to use as the content as a symbol
+                ),
+              {class: "form-control"}
+                )
+              %>
+            <input type="hidden" name="logo_src" value="#">
             <button class="btn btn-outline-primary form-control" type="submit">Add Company</button>
           </form>
         </li>
