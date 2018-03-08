@@ -23,7 +23,8 @@ class IndustriesController < ApplicationController
     if @industry.valid?
       @industry.save
 
-      redirect_to("/industries", :notice => "Industry created successfully.")
+      #redirect_to("/industries", :notice => "Industry created successfully.")
+      redirect_back(fallback_location: "/search", :notice => "Industry created successfully.")
     else
       render("industry_templates/new_form.html.erb")
     end

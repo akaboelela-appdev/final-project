@@ -24,7 +24,8 @@ class CompaniesController < ApplicationController
     if @company.valid?
       @company.save
 
-      redirect_to("/companies", :notice => "Company created successfully.")
+      #redirect_to("/companies", :notice => "Company created successfully.")
+      redirect_back(fallback_location: "/search", :notice => "Company created successfully.")
     else
       render("company_templates/new_form.html.erb")
     end

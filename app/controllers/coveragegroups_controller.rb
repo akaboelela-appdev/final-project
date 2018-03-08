@@ -23,7 +23,8 @@ class CoveragegroupsController < ApplicationController
     if @coveragegroup.valid?
       @coveragegroup.save
 
-      redirect_to("/coveragegroups", :notice => "Coveragegroup created successfully.")
+      #redirect_to("/coveragegroups", :notice => "Coveragegroup created successfully.")
+      redirect_back(fallback_location: "/search", :notice => "Coverage group created successfully.")
     else
       render("coveragegroup_templates/new_form.html.erb")
     end

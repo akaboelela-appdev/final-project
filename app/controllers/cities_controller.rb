@@ -23,7 +23,8 @@ class CitiesController < ApplicationController
     if @city.valid?
       @city.save
 
-      redirect_to("/cities", :notice => "City created successfully.")
+      #redirect_to("/cities", :notice => "City created successfully.")
+      redirect_back(fallback_location: "/search", :notice => "City created successfully.")
     else
       render("city_templates/new_form.html.erb")
     end

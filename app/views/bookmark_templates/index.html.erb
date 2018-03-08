@@ -10,6 +10,7 @@
         <h5 class="card-title">
           <a href="/coveragroups/<%=Coveragegroup.find(role.coveragegroup_id).id%>"><%=Coveragegroup.find(role.coveragegroup_id).name%></a>
           <%=role.title%>
+          at
           <a href="/companies/<%=Company.find(role.company_id).id%>"><%=Company.find(role.company_id).name%></a>
           in
           <a href="/cities/<%=City.find(role.city_id).id%>"><%=City.find(role.city_id).name%></a>
@@ -46,6 +47,7 @@
         <h5 class="card-title">
           <a href="/coveragroups/<%=Coveragegroup.find(role.coveragegroup_id).id%>"><%=Coveragegroup.find(role.coveragegroup_id).name%></a>
           <%=role.title%>
+          at
           <a href="/companies/<%=Company.find(role.company_id).id%>"><%=Company.find(role.company_id).name%></a>
           in
           <a href="/cities/<%=City.find(role.city_id).id%>"><%=City.find(role.city_id).name%></a>
